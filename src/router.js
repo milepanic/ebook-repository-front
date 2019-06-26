@@ -1,6 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Categories from './views/Categories.vue'
+import Category from './views/Category.vue'
+import CreateCategory from './views/CreateCategory.vue'
+import Book from './views/Book.vue'
+import CreateBook from './views/CreateBook.vue'
+import Login from './views/Login.vue'
+import Register from './views/Register.vue'
+import Logout from './components/LogoutComponent.vue'
 
 Vue.use(Router)
 
@@ -10,16 +17,44 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'categories',
+      component: Categories
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: '/categories/:id',
+      name: 'category',
+      component: Category
+    },
+    {
+      path: '/categories/create',
+      name: 'createCategory',
+      component: CreateCategory
+    },
+    {
+      path: '/books/:id',
+      name: 'book',
+      component: Book
+    },
+    {
+      path: '/books/create',
+      name: 'createBook',
+      component: CreateBook,
+      props: true
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login,
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: Register,
+    },
+    {
+      path: '/logout',
+      name: 'logout',
+      component: Logout,
     }
   ]
 })
