@@ -31,21 +31,11 @@ export default {
         config: { headers: {'Content-Type': 'multipart/form-data' }}
       })
       .then(function (response) {
-          //handle success
           console.log(response);
       })
       .catch(function (response) {
-          //handle error
           console.log(response);
       });
-      // axios.put('http://localhost:8000/api/books/' + this.book.id, 
-      //   formData,
-      //   {
-      //     headers: {
-      //       'Content-Type': 'multipart/form-data'
-      //     }
-      //   }).then(res => console.log(res.status))
-      //   .catch(err => console.log(err));
     }
   }
 }

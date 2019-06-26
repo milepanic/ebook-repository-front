@@ -13,6 +13,26 @@
 
 <script>
 export default {
-  name: 'register'
+  name: 'register',
+  data() {
+    return {
+      first_name: '',
+      last_name: '',
+      username: '',
+      email: '',
+      password: '',
+    }
+  },
+  methods: {
+    register() {
+      this.$store.dispatch('register', {
+        first_name: this.first_name,
+        last_name: this.last_name,
+        username: this.username,
+        email: this.email,
+        password: this.password
+      }).then(this.$router.push('/'))
+    }
+  }
 }
 </script>

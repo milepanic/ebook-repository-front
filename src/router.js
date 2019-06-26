@@ -8,6 +8,7 @@ import CreateBook from './views/CreateBook.vue'
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
 import Logout from './components/LogoutComponent.vue'
+import Search from './views/Search.vue'
 
 Vue.use(Router)
 
@@ -45,16 +46,30 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login,
+      meta: {
+        requiresVisitor: true
+      }
     },
     {
       path: '/register',
       name: 'register',
       component: Register,
+      meta: {
+        requiresVisitor: true
+      }
     },
     {
       path: '/logout',
       name: 'logout',
       component: Logout,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/search',
+      name: 'search',
+      component: Search
     }
   ]
 })

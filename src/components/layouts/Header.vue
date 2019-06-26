@@ -4,6 +4,7 @@
       <router-link to="/">eBook Repository</router-link>
     </h1>
     <ul>
+      <li><router-link to="/search">Search</router-link></li>
       <li v-if="!loggedIn"><router-link to="/login">Login</router-link></li>
       <li v-if="!loggedIn"><router-link to="/register">Register</router-link></li>
       <li v-if="loggedIn"><router-link to="/logout">Logout</router-link></li>

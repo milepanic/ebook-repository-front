@@ -11,6 +11,9 @@ export default new Vuex.Store({
   getters: {
     loggedIn(state) {
       return state.token !== null
+    },
+    auth(state) {
+      return state.auth
     }
   },
   mutations: {
@@ -22,6 +25,27 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    register(context, credentials) {
+      return new Promise((resolve, reject) => {
+        axios.post('http://localhost:8000/api/register', {
+          first_name: credentials.first_name,
+          last_name: credentials.last_name,
+          username: credentials.username,
+          email: credentials.email,
+          password: credentials.password
+        }).then(res => {
+          const token = res.data.access_token
+
+          localStorage.setItem('access_token', token)
+          context.commit('retrieveToken', token)
+
+          resolve(res)
+        }).catch(err => {
+          console.log(err)
+          reject(err)
+        })
+      })
+    },
     retrieveToken(context, credentials) {
       return new Promise((resolve, reject) => {
         axios.post('http://localhost:8000/api/login', {

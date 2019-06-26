@@ -1,9 +1,10 @@
 <template>
   <div>
     <form @submit.prevent="storeBook">
+      <input type="file" ref="file">
       <input type="text" placeholder="Naslov" v-model="title">
       <input type="text" placeholder="Autor" v-model="author">
-      <input type="text" placeholder="Datum izdavanja" v-model="publication_year">
+      <input type="number" placeholder="Datum izdavanja" v-model="publication_year">
       <input type="text" placeholder="Keywords" v-model="keywords">
       <button>Submit</button>
     </form>
@@ -26,17 +27,26 @@ export default {
   },
   methods: {
     storeBook() {
-      let data = {
-        title: this.title,
-        author: this.author,
-        publication_year: this.publication_year,
-        category_id: this.category.id,
-        keywords: this.keywords
-      };
+      var formData = new FormData();
+      formData.append('file', this.$refs.file.files[0]);
+      formData.set('title', this.title);
+      formData.set('author', this.author);
+      formData.set('publication_year', this.publication_year);
+      formData.set('category_id', this.category.id);
+      formData.set('keywords', this.keywords);
 
-      axios.post('http://localhost:8000/api/books', data)
-        .then(res => console.log(res.status))
-        .catch(err => console.log(err));
+      axios({
+        method: 'POST',
+        url: 'http://localhost:8000/api/books',
+        data: formData,
+        config: { headers: {'Content-Type': 'multipart/form-data' }}
+      })
+      .then(function (response) {
+          console.log(response);
+      })
+      .catch(function (response) {
+          console.log(response);
+      });
     }
   }
 }
